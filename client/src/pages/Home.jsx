@@ -2,12 +2,12 @@ import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import AddCard from '../components/Cards/AddCard'
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux'
+
 function Home() {
   const [documents, setDocuments] = useState([]);
-  const token = useSelector((state) => state.auth.token);
   useEffect(() => {
     const fetchDocuments = async () => {
+      const token = localStorage.getItem("token")
       const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/documents/mydocs`, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -27,7 +27,7 @@ function Home() {
 
       <div className='w-full flex justify-center py-6'>
         <div className='w-2/3 p-4 bg-gray-100'>
-          <AddCard title='New Document' />
+          <AddCard title='New Document'/>
         </div>
       </div>
 
