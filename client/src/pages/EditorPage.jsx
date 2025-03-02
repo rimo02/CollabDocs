@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 import Editor from '../components/Editor/Editor'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 function EditorPage() {
     const [title, setTitle] = useState("Untitled Document")
     const { id } = useParams()
     const navigate = useNavigate()
-
+    const token = useSelector((state) => state.auth.token);
     useEffect(() => {
         const fetchDocument = async () => {
-            const token = localStorage.getItem("token");
             const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/documents/${id}`, {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },

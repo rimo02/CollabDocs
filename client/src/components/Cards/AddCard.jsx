@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
 function Card({ title }) {
     const navigate = useNavigate()
+    const token = useSelector((state) => state.auth.token)
     const handleAddocument = async () => {
-        const token = localStorage.getItem("token")
         const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/documents/create`, {
             method: "POST",
             headers: {
