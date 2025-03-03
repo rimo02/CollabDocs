@@ -58,13 +58,4 @@ setInterval(async () => {
     }
 }, 300000)
 
-const path = require('path');
-
-const buildPath = path.resolve(__dirname, "client", "dist");
-app.use(express.static(buildPath));
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(buildPath, "index.html"));
-});
-
 module.exports = server
