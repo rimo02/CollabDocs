@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { FaSearch, FaBars, FaTh } from 'react-icons/fa';
+import { FaSearch, FaBars } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import {logout} from '../../store/authSlice.js'
+import { useDispatch } from "react-redux";
 
 function Header({ documents }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredDocs, setFilteredDocs] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
@@ -21,6 +24,11 @@ function Header({ documents }) {
     );
     setFilteredDocs(filtered);
   };
+
+  const handleLogout = () => {
+    dispatch(logout())
+    navigate("/")
+  }
 
   return (
     <header className="relative flex items-center justify-between p-3 bg-white">
@@ -66,8 +74,10 @@ function Header({ documents }) {
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center space-x-4">
-        <FaTh className="text-gray-600 cursor-pointer text-lg" />
+      <div className="flex items-center space-x-4 justify-between">
+        <button className="mr-2 rounded-md bg-blue-500 hover:bg-blue-600 px-2 py-2 text-white cursor-pointer"
+          onClick={() => handleLogout()}
+        >Logout</button>
         <img
           src="https://static.vecteezy.com/system/resources/previews/014/194/216/non_2x/avatar-icon-human-a-person-s-badge-social-media-profile-symbol-the-symbol-of-a-person-vector.jpg"
           alt="Profile"

@@ -16,7 +16,7 @@ app.use(cors({
     origin: process.env.CLIENT_ORIGIN,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', "Authorization"],
-    credentials:true
+    credentials: true
 }))
 app.use(express.json())
 app.use("/api/", authRoutes)
@@ -29,7 +29,6 @@ const io = new Server(server, {
 })
 
 const cache = new Map()
-if (cache.size > 100) cache.clear();
 io.on('connection', (socket) => {
 
     socket.on('join-room', async (id) => {
@@ -55,7 +54,18 @@ io.on('connection', (socket) => {
 setInterval(async () => {
     for (const [id, content] of cache.entries()) {
         await Document.findByIdAndUpdate(id, { content, createdAt: Date.now() })
+        cache.delete(id)
     }
-}, 500000)
+}, 300000)
+
+const path = require('path');
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "client", "dist")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+    });
+}
 
 module.exports = server

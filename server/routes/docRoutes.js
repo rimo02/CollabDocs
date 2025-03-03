@@ -52,7 +52,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
     }
 });
 
-router.post("/delete",async (req, res) => {
+router.post("/delete", authMiddleware, async (req, res) => {
     try {
         const { id } = req.body
         await Document.findByIdAndDelete(id);

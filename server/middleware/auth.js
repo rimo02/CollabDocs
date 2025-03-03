@@ -9,10 +9,8 @@ const authMiddleware = async (req, res, next) => {
         req.user = await User.findById(decoded._id).select("-password");
         next();
     } catch (error) {
-        res.staus(401).json({ error: "Invalid token" });
+        res.status(401).json({ error: "Invalid token" });
     }
 }
-
-
 
 module.exports = authMiddleware

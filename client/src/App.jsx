@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import './App.css'
 import Signup from './components/Signup/Signup'
 import Login from './components/Login/Login'
@@ -32,7 +31,7 @@ function RedirectToHomeOrLanding() {
     if (token && isTokenValid(token)) {
       navigate('/home', { replace: true });
     }
-  }, []);
+  }, [token, navigate]);
 
   return <LandingPage />;
 }
@@ -40,7 +39,7 @@ function RedirectToHomeOrLanding() {
 function ProtectedRoute({ element }) {
   const token = useSelector((state) => state.auth.token);
 
-  if (!token || !isTokenValid(token)) { 
+  if (!token || !isTokenValid(token)) {
     return <Navigate to="/" replace />;
   }
 
