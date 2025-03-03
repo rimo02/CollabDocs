@@ -32,7 +32,7 @@ function Home() {
       <Header documents={documents} />
 
       <div className='w-full flex justify-center py-6 bg-gray-100'>
-        <div className='w-2/3 p-4'>
+        <div className='w-2/3'>
           <AddCard title='New Document' />
         </div>
       </div>
