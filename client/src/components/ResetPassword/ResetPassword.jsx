@@ -73,7 +73,7 @@ function ResetPassword() {
                         />
                         <input type="password"
                             placeholder='Retype password'
-                            value={password}
+                            value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             className='w-full p-2 border rounded mb-2 outline-none border-gray-400'
                             required
