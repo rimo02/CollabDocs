@@ -11,6 +11,8 @@ import LandingPage from './pages/LandingPage'
 import EditorPage from './pages/EditorPage'
 import { jwtDecode } from 'jwt-decode'
 import { useEffect } from 'react'
+import ForgotPassword from './components/ForgotPassword/ForgotPassword'
+import ResetPassword from './components/ResetPassword/ResetPassword'
 
 function isTokenValid(token) {
   if (!token) return false;
@@ -55,7 +57,9 @@ const router = createBrowserRouter([
       { path: "/home", element: <ProtectedRoute element={<Home />} /> },
       { path: "/editor/:id", element: <ProtectedRoute element={<EditorPage />} /> },
       { path: "/login", element: <Login /> },
-      { path: "/signup", element: <Signup /> }
+      { path: "/signup", element: <Signup /> },
+      { path: "/forgot-password", element: <ForgotPassword /> },
+      { path: "/reset-password", element: <ResetPassword /> }
     ]
   }
 ])

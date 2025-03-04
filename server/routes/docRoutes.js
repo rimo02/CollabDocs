@@ -40,14 +40,12 @@ router.put("/:id", authMiddleware, async (req, res) => {
         const { title } = req.body;
         const existDoc = await Document.findById(req.params.id);
         if (!existDoc) {
-            console.error("Document not found:", req.params.id);
             return res.status(404).json({ error: "Document not found" });
         }
         if (title !== undefined) existDoc.title = title;
         await existDoc.save();
         res.json({ message: "Title updated" });
     } catch (error) {
-        console.error("Error updating document:", error);
         res.status(500).json({ error: error.message });
     }
 });
@@ -59,7 +57,6 @@ router.post("/delete", authMiddleware, async (req, res) => {
         res.json({ message: "Document Deleted" })
     }
     catch (error) {
-        console.error("Error Deleting document:", error);
         res.status(500).json({ error: error.message });
     }
 })

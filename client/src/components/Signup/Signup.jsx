@@ -19,10 +19,10 @@ const Signup = () => {
                 setsuccess("Signup Successfull")
                 setTimeout(() => {
                     setsuccess(null)
-                    navigate("/login")
+                    navigate("/home")
                 }, 1000)
             } else {
-                setfail(res.payload || "SigUp Failed")
+                setfail(res.payload || "SignUp Failed")
                 setTimeout(() => {
                     setfail(null)
                 }, 2000)
